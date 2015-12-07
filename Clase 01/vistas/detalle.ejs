@@ -1,0 +1,14 @@
+<html>
+	<head></head>
+	<body>
+		<h1><%= titulo %></h1>
+		<h2>ID <%= id %></h2>
+		<p>Lista de actores
+			<ul>
+				<% actores.forEach(function(actor){ %>
+					<li><%= actor %></li>
+				<% }) %>
+			</ul>
+		</p>
+	</body>
+</html>

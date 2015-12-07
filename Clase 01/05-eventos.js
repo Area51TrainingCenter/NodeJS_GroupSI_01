@@ -15,4 +15,4 @@ pub.once("mi propio evento", function() {
 pub.emit("mi propio evento", "Curso de NodeJS");
 pub.emit("mi propio evento", "Profesor: Sergio Hidalgo");
 pub.removeAllListeners();
-pub.emit("mi propio evento", "Esto ya se muestra");
+pub.emit("mi propio evento", "Esto ya no se muestra");

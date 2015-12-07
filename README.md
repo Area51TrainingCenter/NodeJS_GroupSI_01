@@ -1,1 +1,2 @@
-# NodeJS_GroupSI_01
+# NODEJS + SAILSJS 
+Instructor: Sergio Hidalgo

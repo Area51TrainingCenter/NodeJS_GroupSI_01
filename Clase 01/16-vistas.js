@@ -17,7 +17,7 @@ function fnDetalle(req, res) {
 		id: id,
 		titulo: "La Gran Estafa",
 		actores: [
-			"George Cloony",
+			"George Clooney",
 			"Brad Pitt",
 			"Matt Daemon",
 			"Julia Roberts"

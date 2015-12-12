@@ -10,7 +10,6 @@
 	- pm2 stop <id>   ó  pm2 stop <script.js>
 	- pm2 restart <id> ó pm2 restart <script.js>
 	- pm2 kill <id> ó pm2 kill <script.js>
-
 */
 var express = require("express"),
 	app = express();

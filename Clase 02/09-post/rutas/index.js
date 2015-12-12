@@ -22,21 +22,41 @@ function fnIngresar(req, res) {
 			contrasena : req.body.contrasena
 		};
 
+	console.log(datos);	
+
 	var usuarioValido = false;
 
 	usuarios.forEach(function(usuario){
 		if(usuario.usuario == datos.usuario && usuario.contrasena==datos.contrasena) {
-		 	usuario.usuarioValido = true;
+		 	usuarioValido = true;
 		}
 	});
 
+
 	if(usuarioValido) {
-		req.session = datos;
+		req.session.usuario = datos;
 		res.redirect("/listado");
 	} else {
-		req.session = null;
+		req.session.usuario = null;
 		res.redirect("/noautorizado");
 	}	
+}
+
+function fnListado(req, res) {
+	if(req.session.usuario==null) {
+		res.redirect("/noautorizado");
+	};
+
+	res.send("Usuario autorizado para ver el listado");
+}
+
+function fnNoAutorizado(req, res) {
+	res.send("Usted no está autorizado");
+}
+
+function fnDesloguear(req, res) {
+	req.session.usuario = null;
+	res.redirect("/login");
 }
 
 function fnRutaNoEncontrada(req, res, next) {
@@ -57,6 +77,9 @@ function fnRutaNoEncontrada(req, res, next) {
 rutas.get("/", fnHome);
 rutas.get("/login", fnLogin);
 rutas.post("/ingresar", fnIngresar);
+rutas.get("/listado", fnListado);
+rutas.get("/noautorizado", fnNoAutorizado);
+rutas.get("/logout", fnDesloguear);
 
 rutas.use(fnRutaNoEncontrada);
 

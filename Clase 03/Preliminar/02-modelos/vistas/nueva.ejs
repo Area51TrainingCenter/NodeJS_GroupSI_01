@@ -1,0 +1,24 @@
+<% include ../parciales/cabecera.ejs %>
+	
+	<div class="col-sm-6">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h1>Nueva película</h1>			
+			</div>
+			<div class="panel-body">
+				<form method="post" action="/peliculas/nueva">
+					<div class="form-group">
+						<input type="text" name="titulo" id="titulo" class="form-control" placeholder="Título">
+					</div>
+					<div class="form-group">
+						<input type="text" name="anno" id="anno" class="form-control" placeholder="Año">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Grabar</button><a href="/peliculas" class="btn btn-warning">Cancelar</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>		
+
+<% include ../parciales/pie.ejs %>

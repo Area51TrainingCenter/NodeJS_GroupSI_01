@@ -1,0 +1,18 @@
+<% include ../parciales/cabecera.ejs %>
+	<div class="col-sm-6">
+		<form action="/peliculas/editar/<%= registro.idpelicula %>" method="post">
+			<div class="form-group">
+				<input type="text" name="titulo" placeholder="Ingrese el título" class="form-control" value="<%= registro.titulo %>">
+			</div>
+			<div class="form-group">
+				<input type="text" name="anno" placeholder="Ingrese el año" class="form-control" value="<%= registro.anno %>">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-success">Editar película</button>
+			</div>						
+		</form>
+	</div>
+
+	<script src="javascripts/alerta.js"></script>
+
+<% include ../parciales/pie.ejs %>

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var formidable = require("formidable");
 var fs = require("fs-extra");
+var util = require("util");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -30,6 +31,8 @@ router.post("/subir", function(req, res, next){
 		function fnCopiado(err) {
 			if(err) {
 				console.log(err);
+			} else {
+				res.redirect("/");
 			}
 		}
 

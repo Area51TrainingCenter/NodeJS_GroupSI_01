@@ -1,0 +1,41 @@
+<% include ../parciales/cabecera.ejs %>
+
+				<div class="col-sm-6">
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<h1>Listado de Películas</h1>
+						</div>
+						<div class="panel-body">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Título</th>
+										<th>Año</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% registros.forEach(function(registro){  %>
+									<tr>
+										<td><%= registro.idpelicula %></td>
+										<td><%= registro.titulo %></td>
+										<td><%= registro.anno %></td>
+										<td>
+											<a href="/peliculas/editar-form/<%= registro.idpelicula %>" class="btn btn-warning">
+											Editar
+											</a>
+											&nbsp;
+											<a href="/peliculas/eliminar/<%= registro.idpelicula %>" class="btn btn-danger">Eliminar</a>
+										</td>
+									</tr>
+									<% }) %>
+								</tbody>
+							</table>
+
+							<a href="/peliculas/insertar-form" class="btn btn-success">Agregar</a>
+						</div>
+					</div>
+				</div>
+
+<% include ../parciales/pie.ejs %>

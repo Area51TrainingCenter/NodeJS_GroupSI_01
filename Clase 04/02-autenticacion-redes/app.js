@@ -9,6 +9,8 @@ var credenciales = require("./credenciales");
 
 var passport = require("passport");
 var passportFacebook = require("passport-facebook").Strategy;
+var passportGoogle = require('passport-google-oauth2').Strategy;
+
 var cookieSession = require("cookie-session");
 var modelo = require("./modelos/modeloUsuarios");
 
@@ -24,13 +26,39 @@ passport.deserializeUser(function(usuario, done) {
     done(null, usuario);
 });
 
-  passport.use(new passportFacebook({
-    clientID      : credenciales.facebook.claveCliente,
-    clientSecret  : credenciales.facebook.claveServidor,
-    callbackURL  : credenciales.facebook.urlCallback,
-    profileFields : ['id', 'displayName','photos']
-  }, function(accessToken, refreshToken, profile, done) {
+passport.use(new passportFacebook({
+  clientID      : credenciales.facebook.claveCliente,
+  clientSecret  : credenciales.facebook.claveServidor,
+  callbackURL  : credenciales.facebook.urlCallback,
+  profileFields : ['id', 'displayName','photos']
+}, function(accessToken, refreshToken, profile, done) {
 
+  modelo.validar(profile.id, function(err, registros){
+    if(err) {return done(err);}
+
+    if(registros.length==0) {
+      var obj = {};
+      obj.id = profile.id;
+      obj.proveedor = profile.provider;
+      obj.name = profile.displayName;
+      obj.photo = profile.photos[0].value;
+
+      modelo.insertar(obj, function(err){
+        if(err) return done(null, false);
+        return done(null, obj);
+      })
+    } else {
+      return done(null, registros[0]);
+    }
+  }) 
+}));
+
+
+  passport.use(new passportGoogle({
+    clientID      : credenciales.google.claveCliente,
+    clientSecret    : credenciales.google.claveServidor,
+    callbackURL  : credenciales.google.urlCallback
+  }, function(accessToken, refreshToken, profile, done) {
     modelo.validar(profile.id, function(err, registros){
       if(err) {return done(err);}
 
@@ -39,7 +67,7 @@ passport.deserializeUser(function(usuario, done) {
         obj.id = profile.id;
         obj.proveedor = profile.provider;
         obj.name = profile.displayName;
-        obj.photo = profile.photos[0].value;
+        obj.photo = profile._json.image.url;
 
         modelo.insertar(obj, function(err){
           if(err) return done(null, false);

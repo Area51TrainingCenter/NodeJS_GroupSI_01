@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<style type="text/css">
+		#formChat {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4">
+			<br>
+			<br>
+			<br>
+			<form id="formLogin">
+				<div class="form-group">
+					<input type="text" id="txtUsuario" class="form-control" placeholder="usuario" />	
+				</div>
+				<div class="form-group">
+					<button id="btnLoguear" class="btn btn-success" type="button">Loguearse</button>	
+				</div>
+			</form>
+
+			<form id="formChat">
+				<div class="form-group">
+					<textarea class="form-control" rows="10" id="txtMensajes" sty>
+					</textarea>
+				</div>
+				<div class="form-group">
+					<input type="text" id="txtMensajeChat" class="form-control" placeholder="Escribe tu mensaje" />	
+				</div>
+				<div class="form-group">
+					<button id="btnEnviarMensaje" class="btn btn-success" type="button">Enviar Mensaje</button>	
+					<button id="btnDesloguear" class="btn btn-danger" type="button">Desloguear</button>	
+				</div>
+			</form>
+
+		</div>
+
+		<div class="col-sm-4">
+			<br>
+			<br>
+			<br>
+			<pre>
+				<ul id="zonaLog"></ul>
+			</pre>
+		</div>	
+
+		<div class="col-sm-4">
+			<br>
+			<br>
+			<br>
+			<select class="form-control" size="10px" id="selLista"></select>
+			<button id="btnDeseleccionar" class="btn btn-warning" type="button">Deseleccionar</button>	
+		</div>	
+
+	</div>
+</div>
+
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/javascripts/main.js"></script>
+
+</body>
+</html>

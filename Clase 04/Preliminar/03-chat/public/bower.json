@@ -1,0 +1,21 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/Area51TrainingCenter/NodeJS_GroupSI_01",
+  "authors": [
+    "Sergio Hidalgo <sergio.hidalgo@adncreativa.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}

@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var cookieSession = require("cookie-session");
 var bodyParser = require('body-parser');
 
+var modelo = require("./modelos/modeloUsuarios");
+
 var passport = require("passport");
 var passportLocal = require("passport-local").Strategy;
 
@@ -18,7 +20,17 @@ passport.serializeUser(function(usuario, done) {
 });
  
 passport.deserializeUser(function(usuario, done) {
-    done(null, usuario);
+    console.log("deserealizacion = " + usuario);
+
+    modelo.detalle(usuario, function(err, datos){
+      if(err) {
+        done(false, null)
+      } else {
+        done(null, {nombre: datos[0].nombre})
+      }
+    })
+
+    //done(null, usuario);
 });
 
 passport.use(new passportLocal(
@@ -30,7 +42,33 @@ passport.use(new passportLocal(
     console.log("Usuario: "+username);
     console.log("Contraseña: "+password);
 
-    return done(null, username);    
+    modelo.validar(username, password, function(err, datos){
+      if(err) {
+        return done(false, null)
+      };
+
+      if(datos.length) {
+        var usuarioId = datos[0].id;
+        return done(null, usuarioId);
+      } else {
+        return done(false, null);
+      }
+
+    })
+
+
+    /*if(username=="sergio" && password=="123456") {
+      var datos = {
+        id: 123,
+        usuario: username
+      };
+
+      return done(null, datos);
+    } else {
+      return done(false, null);
+    }*/
+
+    
   }
 ));
 
@@ -82,6 +120,7 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+
 });
 
 

@@ -2,13 +2,24 @@ var express = require('express');
 var router = express.Router();
 var passport = require("passport");
 
-/* GET home page. */
+var estaAutenticado = function (req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/');
+}
+
+
+	/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  if(req.isAuthenticated()) {
+  	res.render("autenticado");
+  } else {
+  	res.render('index');	
+  }
+  
 });
 
-router.get('/autenticado', function(req, res, next) {
-  res.render('autenticado');
+router.get('/autenticado', estaAutenticado, function(req, res, next) {
+  res.render('autenticado', req.user);
 });
 
 

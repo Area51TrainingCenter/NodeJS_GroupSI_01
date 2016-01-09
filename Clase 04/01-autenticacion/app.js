@@ -20,15 +20,17 @@ passport.serializeUser(function(usuario, done) {
 });
  
 passport.deserializeUser(function(usuario, done) {
-    console.log("deserealizacion = " + usuario);
+    console.log("deserealizacion = " + usuario.nombre);
 
-    modelo.detalle(usuario, function(err, datos){
+    done(null, usuario);
+
+    /*modelo.detalle(usuario, function(err, datos){
       if(err) {
         done(false, null)
       } else {
         done(null, {nombre: datos[0].nombre})
       }
-    })
+    })*/
 
     //done(null, usuario);
 });
@@ -48,8 +50,8 @@ passport.use(new passportLocal(
       };
 
       if(datos.length) {
-        var usuarioId = datos[0].id;
-        return done(null, usuarioId);
+        var usuario = {nombre: datos[0].nombre};
+        return done(null, usuario);
       } else {
         return done(false, null);
       }

@@ -11,7 +11,7 @@ var estaAutenticado = function (req, res, next) {
 	/* GET home page. */
 router.get('/', function(req, res, next) {
   if(req.isAuthenticated()) {
-  	res.render("autenticado");
+  	res.render("autenticado", req.user);
   } else {
   	res.render('index');	
   }
@@ -30,5 +30,9 @@ router.post('/loguear',
 			}
 ));
 
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+})
 
 module.exports = router;

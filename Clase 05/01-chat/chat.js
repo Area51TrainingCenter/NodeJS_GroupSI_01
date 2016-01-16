@@ -22,9 +22,14 @@ module.exports = function(io){
 			console.log(listaUsuario);
 		}
 
-		function fnMensajeUsuario(mensaje) {
+		function fnMensajeUsuario(mensaje, usuarioId) {
 			console.log(socket.nombre + ": " + mensaje);
-			socket.broadcast.emit("mensaje enviado",socket.nombre + ": " + mensaje);
+			if(usuarioId) {
+				socket.broadcast.to(usuarioId).emit("mensaje enviado",socket.nombre + ": " + mensaje);
+			} else {
+				socket.broadcast.emit("mensaje enviado",socket.nombre + ": " + mensaje);
+			}
+			
 		}
 
 		socket.on("nombre usuario", fnNombreUsuario);

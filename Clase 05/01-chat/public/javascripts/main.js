@@ -11,6 +11,18 @@ var txtInputMensaje = document.getElementById("txtInputMensaje");
 var btnEnviarMensaje = document.getElementById("btnEnviarMensaje");
 var selLista = document.getElementById("selLista");
 
+//Funciones extras
+function fnUsuarioSeleccionado(){
+	var opciones = selLista.getElementsByTagName("option");
+	for(var i=0; i<opciones.length; i++) {
+		if(opciones[i].selected) {
+			return opciones[i].value;
+		}
+	};
+
+	return "";
+}
+
 //Funciones de Callback de Socket
 function fnUsuarioConectado(){
 	log.innerHTML += "Usuario conectado<br>";
@@ -56,7 +68,7 @@ function fnEnviarMensaje(){
 	var mensaje = txtInputMensaje.value.trim();
 	if(mensaje){
 		txtMensajes.value += mensaje + String.fromCharCode(13);
-		socket.emit("mensaje usuario", mensaje);
+		socket.emit("mensaje usuario", mensaje, fnUsuarioSeleccionado());
 	}
 }
 

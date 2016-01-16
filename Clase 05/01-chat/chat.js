@@ -11,8 +11,8 @@ module.exports = function(io){
 			socket.nombre = nombre;
 
 			listaUsuario.push(datos);
-			console.log("Lista después de loguear");
-			console.log(listaUsuario);
+			socket.emit("usuario aceptado", listaUsuario);
+			socket.broadcast.emit("usuario agregado", datos);
 		}
 
 		function fnDesconectarUsuario(){
@@ -22,8 +22,14 @@ module.exports = function(io){
 			console.log(listaUsuario);
 		}
 
+		function fnMensajeUsuario(mensaje) {
+			console.log(socket.nombre + ": " + mensaje);
+			socket.broadcast.emit("mensaje enviado",socket.nombre + ": " + mensaje);
+		}
+
 		socket.on("nombre usuario", fnNombreUsuario);
 		socket.on("disconnect", fnDesconectarUsuario);
+		socket.on("mensaje usuario", fnMensajeUsuario);
 
 	})
 

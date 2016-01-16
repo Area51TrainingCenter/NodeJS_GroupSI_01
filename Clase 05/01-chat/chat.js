@@ -20,6 +20,7 @@ module.exports = function(io){
 			listaUsuario.slice(listaUsuario.indexOf(datos), 1);
 			console.log("Lista después de desconectar");
 			console.log(listaUsuario);
+			socket.broadcast.emit("usuario desconectado", datos);
 		}
 
 		function fnMensajeUsuario(mensaje, usuarioId) {

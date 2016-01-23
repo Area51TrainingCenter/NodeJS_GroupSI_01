@@ -1,0 +1,11 @@
+<h1>Editar usuario</h1>
+
+<form action="/editar/<%= id %>" method="post">
+  <input type="text" name="usuario" placeholder="Ingrese usuario" value="<%= nombreUsuario %>">
+
+  <br>
+
+  <input type="password" name="contrasena" placeholder="Ingrese contraseña" value="<%= contrasena %>">
+
+  <button type="submit">Grabar</button>
+</form>

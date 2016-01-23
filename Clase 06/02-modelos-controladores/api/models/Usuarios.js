@@ -20,7 +20,11 @@ module.exports = {
     nombreUsuario: {
       type: "string",
       size: 4000
-    }
+    },
+
+    contrasena: "string"
+
+
 
   }
 };

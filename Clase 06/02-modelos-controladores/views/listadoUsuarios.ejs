@@ -1,0 +1,28 @@
+<table>
+  <caption>Lista de Usuarios</caption>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Fecha Creación</th>
+      <th>Fecha Actualización</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% reg.forEach(function(item){ %>
+    <tr>
+      <td><%= item.id %></td>
+      <td><%= item.nombreUsuario %></td>
+      <td><%= item.createdAt %></td>
+      <td><%= item.updatedAt %></td>
+      <td><a href="/formEditar/<%= item.id %>">Editar</a></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<a href="/formInsertar">Insertar usuario</a><br>
+
+
+<a href="/logout">Desloguear</a>

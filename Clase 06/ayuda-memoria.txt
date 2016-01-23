@@ -1,0 +1,35 @@
+GENERADOR SAILS
+npm install sails -g
+
+CREAR APLICACIÓN
+sails new <<Nombre Proyecto>>
+
+CREAR MODELO
+sails generate model <<Nombre Modelo>>
+sails generate model <<Nombre Modelo>> id:"integer" nombre:"string"
+
+CREAR CONTROLADOR
+sails generate controller <<Nombre 
+Controlador>>
+sails generate controller <<Nombre Controlador>> listar editar borrar insertar actualizar
+
+CREAR MODELO Y CONTROLADOR
+sails generate api <<Nombre Modelo/Controlador>>
+
+EJECUTAR SAILS
+sails lift
+
+EJECUTAR CONSOLA SAILS
+sails console
+
+Usuarios.find().exec(console.log)
+Usuarios.create({nombreUsuario: "Sergio"}).exec(console.log)
+Usuarios.update({id:2}, {nombreUsuario: "Sergio Iván"}).exec(console.log)
+Usuarios.destroy({id:2}).exec(console.log)
+
+
+
+
+
+
+

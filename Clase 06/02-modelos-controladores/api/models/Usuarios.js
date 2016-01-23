@@ -23,9 +23,6 @@ module.exports = {
     },
 
     contrasena: "string"
-
-
-
   }
 };
 

@@ -1,11 +1,22 @@
 <h1>Agregar usuario</h1>
 
 <form action="/insertar" method="post">
+  <fieldset>
+    <legend>Usuario</legend>
   <input type="text" name="usuario" placeholder="Ingrese usuario">
 
   <br>
 
   <input type="password" name="contrasena" placeholder="Ingrese contraseña">
+
+  </fieldset>
+
+  <fieldset>
+    <legend>Mascota</legend>
+
+    <input type="text" name="nombreMascota" placeholder="Ingrese su mascota">
+
+  </fieldset>
 
   <button type="submit">Ingresar</button>
 </form>

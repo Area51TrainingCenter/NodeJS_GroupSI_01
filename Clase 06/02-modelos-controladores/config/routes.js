@@ -69,6 +69,11 @@ module.exports.routes = {
   "post /editar/:id": {
     controller: "Usuarios",
     action: "editar"
+  },
+
+  "get /eliminar/:id": {
+    controller: "Usuarios",
+    action: "eliminar"
   }
 
 

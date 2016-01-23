@@ -37,7 +37,8 @@ module.exports.policies = {
     logout: true,
     formInsertar: "sessionAuth",
     formEditar: "sessionAuth",
-    editar: "sessionAuth"
+    editar: "sessionAuth",
+    eliminar: "sessionAuth"
   }
 
 

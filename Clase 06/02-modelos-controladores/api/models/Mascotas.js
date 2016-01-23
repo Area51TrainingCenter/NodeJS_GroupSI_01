@@ -7,8 +7,25 @@
 
 module.exports = {
 
+  connection: "connMySQL",
+  tableName: "mascotas",
   attributes: {
+    id: {
+      type:"integer",
+      primaryKey: true,
+      autoIncrement: true,
+      unique: true
+    },
 
+    nombreMascota: {
+      type: "string",
+      size: 255
+    },
+
+    usuario: {
+      model: "usuarios"
+    }
   }
+
 };
 

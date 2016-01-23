@@ -69,6 +69,8 @@ module.exports = {
     var nombreUsuario = req.body.usuario;
     var contrasena = req.body.contrasena;
 
+    var nombreMascota = req.body.nombreMascota;
+
     var datos = {
       nombreUsuario: nombreUsuario,
       contrasena: contrasena
@@ -76,16 +78,18 @@ module.exports = {
 
     Usuarios
       .create(datos)
-      .then(function(registros){
+      .then(function(registro){
+        var usuario=registro.id;
+        var datosMascota = {usuario: usuario, nombreMascota: nombreMascota};
+
+        return Mascotas.create(datosMascota);
+      })
+      .then(function(registroMascota){
         res.redirect("/listarUsuarios");
       })
       .catch(function(err){
         res.negotiate(err);
       });
-  },
-
-  actualizar: function(req, res){
-
   },
 
   editar: function(req, res){
@@ -105,6 +109,17 @@ module.exports = {
   },
 
   eliminar: function(req, res){
+    var id = req.params.id;
+
+    Usuarios
+      .destroy()
+      .where({id: id})
+      .then(function(registros){
+        res.redirect("/listarUsuarios");
+      })
+      .catch(function(err){
+        res.negotiate(err);
+      });
 
   }
 

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf8">
+</head>
+<body>
+
+	<form method="post" action="/medicos/actualizar/<%= reg[0].idMedico %>">
+		<input type="text" name="nombreCompleto" placeholder="Ingrese el nombre" value="<%= reg[0].nombreCompleto %>"><br>
+		<button type="submit">Enviar</button>
+	</form>
+
+</body>
+</html>

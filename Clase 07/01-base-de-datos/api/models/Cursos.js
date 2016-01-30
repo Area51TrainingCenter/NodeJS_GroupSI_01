@@ -23,6 +23,10 @@ module.exports = {
   	activo: {
   		type: "boolean",
   		defaultsTo: false
+  	},
+
+  	alumno: {
+  		model: "Alumnos"
   	}
 
   }

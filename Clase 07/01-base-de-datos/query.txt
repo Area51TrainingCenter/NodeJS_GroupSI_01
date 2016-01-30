@@ -3,3 +3,14 @@ PARA INSERTAR
 Alumnos.create({nombre: "Sergio Hidalgo", sexo: "hombre", fechaNacimiento
 : new Date(1/1/1970), historial:{curso:"mate1"}, foto: "http://profile.facebook.
 com/sergio.hidalgo.14/picture"}).exec(console.log)
+
+PARA LISTAR
+Alumnos.find().exec(console.log)
+Alumnos.find({idAlumno:2}).exec(console.log)
+Alumnos.findLike({sexo:'hombre'},function(err,reg){console.log(reg);})
+
+PARA ACTUALIZAR
+Alumnos.update({sexo:'hombres', fechaNacimiento: {'>=': new Date("5/1/2000")}},{correo:'sergiohidalgocaceres@gmail.com', fechaNacimiento: new Date("4/1/1978")}).exec(console.log)
+
+PARA BORRAR
+Alumnos.destroy({idAlumno: 2}).exec(console.log)

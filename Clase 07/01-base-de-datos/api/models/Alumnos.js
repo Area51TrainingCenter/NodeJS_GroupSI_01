@@ -51,6 +51,11 @@ module.exports = {
   	foto: {
   		type:"string",
   		size: 500
+  	},
+
+  	curso: {
+  		collection: "Cursos",
+  		via: "alumno"
   	}
 
 

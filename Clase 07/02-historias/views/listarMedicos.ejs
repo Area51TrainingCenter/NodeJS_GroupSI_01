@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf8">
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% regs.forEach(function(reg){ %>
+			<tr>
+				<td><%= reg.idMedico %></td>
+				<td><%= reg.nombreCompleto %></td>
+				<td><a href="/medicos/editar/<%= reg.idMedico %>">Editar</a>&nbsp;<a href="/medicos/eliminar/<%= reg.idMedico %>">Eliminar</a></td>
+			</tr>
+			<% }) %>
+		</tbody>
+	</table>
+
+</body>
+</html>

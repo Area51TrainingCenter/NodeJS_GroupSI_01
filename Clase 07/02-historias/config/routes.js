@@ -33,8 +33,8 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'homepage'
-  }
+    view: 'menu'
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -45,5 +45,78 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
+  'get /medicos/listar': {
+    controller: "Medicos",
+    action: "listar"
+  },
 
+  'post /medicos/insertar/:id': {
+    controller: "Medicos",
+    action: "insertar"
+  },
+
+  'get /medicos/editar/:id': {
+    controller: "Medicos",
+    action: "editar"
+  },  
+
+  'post /medicos/actualizar/:id': {
+    controller: "Medicos",
+    action: "actualizar"
+  },
+
+  'get /medicos/eliminar/:id': {
+    controller: "Medicos",
+    action: "eliminar"
+  },
+
+  'get /enfermeros/listar': {
+    controller: "Enfermeros",
+    action: "listar"
+  },
+
+  'post /enfermeros/insertar/:id': {
+    controller: "Enfermeros",
+    action: "insertar"
+  },
+
+  'get /enfermeros/editar/:id': {
+    controller: "Enfermeros",
+    action: "editar"
+  },  
+
+  'post /enfermeros/actualizar/:id': {
+    controller: "Enfermeros",
+    action: "actualizar"
+  },
+
+  'get /enfermeros/eliminar/:id': {
+    controller: "Enfermeros",
+    action: "eliminar"
+  },
+
+  'get /diagnosticos/listar': {
+    controller: "Diagnostico",
+    action: "listar"
+  },
+
+  'post /diagnosticos/insertar/:id': {
+    controller: "Diagnostico",
+    action: "insertar"
+  },
+
+  'get /diagnosticos/editar/:id': {
+    controller: "Diagnostico",
+    action: "editar"
+  },  
+
+  'post /diagnosticos/actualizar/:id': {
+    controller: "Diagnostico",
+    action: "actualizar"
+  },
+
+  'get /diagnosticos/eliminar/:id': {
+    controller: "Diagnostico",
+    action: "eliminar"
+  }
 };

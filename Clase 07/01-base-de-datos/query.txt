@@ -1,0 +1,5 @@
+PARA INSERTAR
+
+Alumnos.create({nombre: "Sergio Hidalgo", sexo: "hombre", fechaNacimiento
+: new Date(1/1/1970), historial:{curso:"mate1"}, foto: "http://profile.facebook.
+com/sergio.hidalgo.14/picture"}).exec(console.log)

@@ -26,7 +26,7 @@ module.exports = {
   	},
 
   	diagnostico: {
-  		model: "Diagnosticos"
+  		model: "Diagnostico"
   	}
 
   }

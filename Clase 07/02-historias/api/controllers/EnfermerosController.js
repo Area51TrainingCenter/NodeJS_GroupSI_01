@@ -6,6 +6,10 @@
  */
 
 module.exports = {
-	
+	listar: function(req, res){},
+	actualizar: function(req, res){},
+	eliminar: function(req, res){},
+	editar: function(req, res){},
+	insertar: function(req, res){}	
 };
 

@@ -10,7 +10,7 @@ module.exports = {
 		Enfermeros
 			.find()
 			.then(function(registros){
-				res.view("listarEnfermeros",{regs: registros})
+				res.view("listarEnfermeros",{regs: registros, layout: "base"})
 			})
 			.catch(function(err){
 				res.negotiate(err);
@@ -49,7 +49,7 @@ module.exports = {
 			.find()
 			.where({idEnfermero: id})
 			.then(function(registro){
-				res.view("editarEnfermeros", {reg:registro});
+				res.view("editarEnfermeros", {reg:registro, layout: "base"});
 			})
 			.catch(function(err){
 				res.negotiate(err)

@@ -1,0 +1,46 @@
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Paciente</th>
+				<th>Médico</th>
+				<th>Enfermero</th>
+				<th>Diagnóstico</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% regHistorias.forEach(function(reg){ %>
+			<tr>
+				<td><%= reg.idHistoria %></td>
+				<td><%= reg.nombrePaciente %></td>
+				<td><%= reg.medico[0].nombreCompleto %></td>
+				<td><%= reg.enfermero[0].nombreCompleto %></td>
+				<td><%= reg.diagnostico[0].nombreDiagnostico %></td>
+				<td><a href="/historias/editar/<%= reg.idHistoria %>">Editar</a>&nbsp;<a href="/historias/eliminar/<%= reg.idHistoria %>">Eliminar</a></td>
+			</tr>
+			<% }) %>
+		</tbody>
+	</table>
+	<form method="post" action="/historias/insertar">
+		<input type="text" name="nombrePaciente" placeholder="Ingrese el nombre"><br>
+		Médico<br>
+		<select name="medico">
+		<% regMedicos.forEach(function(reg){ %>
+			<option value="<%= reg.idMedico%>"><%= reg.nombreCompleto %></option>
+		<% }) %>
+		</select><br>
+		Enfermero<br>
+		<select name="enfermero">
+		<% regEnfermeros.forEach(function(reg){ %>
+			<option value="<%= reg.idEnfermero %>"><%= reg.nombreCompleto %></option>
+		<% }) %>
+		</select><br>	
+		Diagnóstico<br>
+		<select name="diagnostico">
+		<% regDiagnosticos.forEach(function(reg){ %>
+			<option value="<%= reg.idDiagnostico %>"><%= reg.nombreDiagnostico %></option>
+		<% }) %>
+		</select><br>			
+		<button type="submit">Enviar</button>
+	</form>

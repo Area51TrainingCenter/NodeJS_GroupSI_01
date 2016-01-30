@@ -33,7 +33,10 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'menu'
+    view: 'menu',
+    locals: {
+      layout: 'base'
+    }    
   },
 
   /***************************************************************************
@@ -50,7 +53,7 @@ module.exports.routes = {
     action: "listar"
   },
 
-  'post /medicos/insertar/:id': {
+  'post /medicos/insertar': {
     controller: "Medicos",
     action: "insertar"
   },
@@ -75,7 +78,7 @@ module.exports.routes = {
     action: "listar"
   },
 
-  'post /enfermeros/insertar/:id': {
+  'post /enfermeros/insertar': {
     controller: "Enfermeros",
     action: "insertar"
   },
@@ -100,7 +103,7 @@ module.exports.routes = {
     action: "listar"
   },
 
-  'post /diagnosticos/insertar/:id': {
+  'post /diagnosticos/insertar': {
     controller: "Diagnostico",
     action: "insertar"
   },
@@ -118,5 +121,10 @@ module.exports.routes = {
   'get /diagnosticos/eliminar/:id': {
     controller: "Diagnostico",
     action: "eliminar"
-  }
+  },
+
+  'get /historias/listar': {
+    controller: "Historias",
+    action: "listar"
+  } 
 };

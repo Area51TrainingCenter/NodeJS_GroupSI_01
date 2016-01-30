@@ -1,0 +1,22 @@
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% regs.forEach(function(reg){ %>
+			<tr>
+				<td><%= reg.idDiagnostico %></td>
+				<td><%= reg.nombreDiagnostico %></td>
+				<td><a href="/diagnosticos/editar/<%= reg.idDiagnostico %>">Editar</a>&nbsp;<a href="/diagnosticos/eliminar/<%= reg.idDiagnostico %>">Eliminar</a></td>
+			</tr>
+			<% }) %>
+		</tbody>
+	</table>
+	<form method="post" action="/diagnosticos/insertar">
+		<input type="text" name="nombreDiagnostico" placeholder="Ingrese el nombre"><br>
+		<button type="submit">Enviar</button>
+	</form>

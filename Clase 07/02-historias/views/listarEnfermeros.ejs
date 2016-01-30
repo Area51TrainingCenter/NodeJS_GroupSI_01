@@ -9,14 +9,14 @@
 		<tbody>
 			<% regs.forEach(function(reg){ %>
 			<tr>
-				<td><%= reg.idMedico %></td>
+				<td><%= reg.idEnfermero %></td>
 				<td><%= reg.nombreCompleto %></td>
-				<td><a href="/medicos/editar/<%= reg.idMedico %>">Editar</a>&nbsp;<a href="/medicos/eliminar/<%= reg.idMedico %>">Eliminar</a></td>
+				<td><a href="/enfermeros/editar/<%= reg.idEnfermero %>">Editar</a>&nbsp;<a href="/enfermeros/eliminar/<%= reg.idEnfermero %>">Eliminar</a></td>
 			</tr>
 			<% }) %>
 		</tbody>
 	</table>
-	<form method="post" action="/medicos/insertar">
+	<form method="post" action="/enfermeros/insertar">
 		<input type="text" name="nombreCompleto" placeholder="Ingrese el nombre"><br>
 		<button type="submit">Enviar</button>
 	</form>

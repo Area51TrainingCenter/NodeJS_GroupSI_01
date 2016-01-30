@@ -10,7 +10,7 @@ module.exports = {
 		Diagnostico
 			.find()
 			.then(function(registros){
-				res.view("listarDiagnostico",{regs: registros})
+				res.view("listarDiagnosticos",{regs: registros, layout: "base"})
 			})
 			.catch(function(err){
 				res.negotiate(err);
@@ -49,7 +49,7 @@ module.exports = {
 			.find()
 			.where({idDiagnostico: id})
 			.then(function(registro){
-				res.view("editarDiagnostico", {reg:registro});
+				res.view("editarDiagnosticos", {reg:registro, layout: "base"});
 			})
 			.catch(function(err){
 				res.negotiate(err)
@@ -64,7 +64,8 @@ module.exports = {
 				res.redirect("/diagnosticos/listar");
 			})
 			.catch(function(err){
-				res.negotiate(err)
+				console.log(err);
+				res.send(err)
 			})				
 	}
 };

@@ -8,7 +8,18 @@
 module.exports = {
 
   attributes: {
-
+  	idMascota: {
+  		primaryKey: true,
+  		type: "integer",
+  		autoIncrement: true,
+  		unique: true
+  	},
+  	nombre:"string",
+  	raza: "string",
+  	dueno: {
+  		collection: "Duenos",
+  		via: "mascota"
+  	}
   }
 };
 

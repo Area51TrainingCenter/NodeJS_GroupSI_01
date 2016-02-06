@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title></title>
+	<style>
+		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+		  display: none !important;
+		}
+	</style>
+</head>
+<body ng-controller="controlador as ctrl">
+
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Nombres</th>
+			<th>Apellidos</th>
+			<th>Acciones</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in ctrl.usuarios" class="ng-cloak">
+			<td>{{item.id}}</td>
+			<td>{{item.nombres}}</td>
+			<td>{{item.apellidos}}</td>
+			<td><a href ng-click="ctrl.editar(item)">Editar</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<form>
+	<input type="text" ng-model="ctrl.datosUsuario.nombres">
+	<br>
+	<input type="text" ng-model="ctrl.datosUsuario.apellidos">
+	<br>
+	<button ng-click="ctrl.grabar()">Grabar</button>
+</form>
+<pre>
+	{{ctrl.datosUsuario.nombres}}
+</pre>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+
+<script>
+	angular
+		.module("app",[])
+		.controller("controlador",["$http", function($http){
+/*			this.usuarios = [
+				{id: 1, nombres: "Sergio", apellidos: "Hidalgo"},
+				{id: 2, nombres: "Gabriela", apellidos: "Altamirano"},
+				{id: 3, nombres: "Evelyn", apellidos: "Gotfried"}
+			]*/
+
+			var ref = this;
+			this.datosUsuario = {};
+
+			function listar(){
+				$http
+					.get("/usuarios")
+					.then(
+						function(respuesta){
+							ref.usuarios = respuesta.data;
+							// console.log(respuesta);
+						}, 
+						function(err){
+							console.log(err);
+						}
+					);			
+			}
+
+			this.editar = function(item) {
+				$http
+					.get("/usuarios/"+item.id)
+					.then(function(respuesta){
+						if(respuesta.data.length) {
+							ref.datosUsuario = respuesta.data[0];
+						}					
+					}, function(err){
+						console.log(err);
+					})
+			};
+
+			this.grabar = function(){
+				$http
+					.put("/usuarios/"+this.datosUsuario.id,
+						this.datosUsuario)
+					.then(function(respuesta){
+						listar();
+					}, function(err){
+						console.log(err);
+					});
+			};
+
+			listar();
+
+		}])
+
+</script>
+
+
+</body>
+</html>

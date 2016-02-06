@@ -59,6 +59,16 @@ module.exports.routes = {
   "put /usuarios/:id": {
     controller: "UsuariosController",
     action: "actualizar"
+  },
+
+  "post /usuarios": {
+    controller: "UsuariosController",
+    action: "insertar"
+  },
+
+  "delete /usuarios/:id": {
+    controller: "UsuariosController",
+    action: "eliminar"
   }
 
 };

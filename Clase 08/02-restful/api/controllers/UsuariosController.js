@@ -42,5 +42,39 @@ module.exports = {
 			.catch(function(err){
 				res.negotiate(err);
 			});
+	},
+
+	insertar: function(req, res) {
+		var nombres = req.body.nombres;
+		var apellidos = req.body.apellidos;
+
+		console.log(req.allParams());
+
+		var data = {nombres: nombres, apellidos: apellidos};
+
+		Usuarios
+			.create(data)
+			.then(function(registros){
+				res.ok();
+			})
+			.catch(function(err){
+				res.negotiate(err);
+			});
+	},
+
+	eliminar: function(req, res) {
+		var id = req.params.id;
+		var filtro = {id: id};
+
+		Usuarios
+			.destroy()
+			.where(filtro)
+			.then(function(registros){
+				res.ok();
+			})
+			.catch(function(err){
+				res.negotiate(err);
+			});			
 	}
+
 }

@@ -10,6 +10,7 @@
 </head>
 <body ng-controller="controlador as ctrl">
 
+<a href ng-click="ctrl.accion='insertar'">Insertar</a>
 <table>
 	<thead>
 		<tr>
@@ -20,6 +21,15 @@
 		</tr>
 	</thead>
 	<tbody>
+		<tr ng-show="ctrl.accion=='insertar'">
+			<td></td>
+			<td><input type="text" ng-model="ctrl.datosUsuario.nombres"></td>
+			<td><input type="text" ng-model="ctrl.datosUsuario.apellidos"></td>
+			<td>
+				<a href ng-click="ctrl.insertar()">Grabar</a>
+				<a href ng-click="ctrl.accion=''">Cancelar</a>
+			</td>
+		</tr>
 		<tr ng-repeat="item in ctrl.usuarios" class="ng-cloak">
 			<td>{{item.id}}</td>
 			<td>
@@ -33,7 +43,8 @@
 			<td>
 				<a href ng-click="ctrl.editar(item)" ng-hide="item.accion=='editar'">Editar</a>&nbsp;
 				<a href ng-click="ctrl.grabar(item)" ng-show="item.accion=='editar'">Grabar</a>&nbsp;
-				<a href ng-click="item.accion=''" ng-show="item.accion=='editar'">Cancelar</a>
+				<a href ng-click="item.accion=''" ng-show="item.accion=='editar'">Cancelar</a>&nbsp;
+				<a href ng-click="ctrl.eliminar(item)">Eliminar</a>
 			</td>
 		</tr>
 	</tbody>
@@ -52,6 +63,8 @@
 			]*/
 
 			var ref = this;
+			this.accion = "";
+			this.datosUsuario = {};
 	
 			function listar(){
 				$http
@@ -94,6 +107,28 @@
 						console.log(err);
 					});
 			};
+
+			this.insertar = function(){
+				$http
+					.post("/usuarios", this.datosUsuario)
+					.then(function(respuesta){
+						ref.accion="";
+						ref.datosUsuario = {};
+						listar();
+					}, function(err){
+						console.log(err);
+					})
+			};
+
+			this.eliminar = function(item) {
+				$http
+					.delete("/usuarios/"+item.id)
+					.then(function(respuesta){
+						listar();
+					}, function(err){
+						console.log(err);
+					})					
+			}
 
 			listar();
 

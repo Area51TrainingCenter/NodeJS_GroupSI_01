@@ -52,6 +52,16 @@ module.exports.routes = {
   "get /lista": {
     controller: "UsuariosController",
     action: "listar"
+  },
+
+  "get /formulario": {
+    controller: "UsuariosController",
+    action: "formInsertar"
+  },
+
+  "post /insertar": {
+    controller: "UsuariosController",
+    action: "insertar"
   }
 
 };

@@ -14,6 +14,24 @@ module.exports = {
    */
   listar: function (req, res) {
     res.view("lista", {nombre:"Sergio Hidalgo", layout: "base"});
+  },
+
+  formInsertar: function(req, res){
+  	res.view("formularioInsertar", {layout:"base"});
+  },
+
+  insertar: function(req, res) {
+  	var nombres = req.body.nombres;
+  	var apellidos = req.body.apellidos;
+
+  	Usuarios
+  		.create({nombres: nombres, apellidos: apellidos})
+  		.then(function(registros){
+  			res.redirect("/formulario");
+  		})
+  		.catch(function(err){
+  			res.negotiate(err);
+  		})
   }
 };
 

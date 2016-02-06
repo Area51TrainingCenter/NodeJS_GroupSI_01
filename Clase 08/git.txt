@@ -1,0 +1,5 @@
+Para clonar:
+git clone <<url del repositorio>>
+
+Para sincronizar (tienen que estar dentro de la carpeta del repositorio)
+git pull origin master

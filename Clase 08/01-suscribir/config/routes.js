@@ -62,6 +62,11 @@ module.exports.routes = {
   "post /insertar": {
     controller: "UsuariosController",
     action: "insertar"
+  },
+
+  "get /observar": {
+    controller: "UsuariosController",
+    action: "observar"
   }
 
 };

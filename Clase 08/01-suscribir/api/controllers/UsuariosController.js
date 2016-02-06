@@ -32,6 +32,22 @@ module.exports = {
   		.catch(function(err){
   			res.negotiate(err);
   		})
+  },
+
+  observar: function(req, res) {
+  	Usuarios
+  		.find()
+  		.then(function(reg){
+		  	if(req.isSocket) {
+		  		Usuarios.subscribe(req.socket, reg);
+		  		Usuarios.watch(req.socket);
+		  	}; 		
+		  	res.ok();	
+  		})
+
+  	
+  	// res.writeHead(200, {"content-type": "text/plain" });
+  	// res.end("ok");
   }
 };
 

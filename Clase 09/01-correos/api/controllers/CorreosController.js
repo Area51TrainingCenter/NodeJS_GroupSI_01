@@ -4,6 +4,8 @@
  * @description :: Server-side logic for managing correos
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var fs = require("fs");
+var ejs = require("ejs");
 
 module.exports = {
 
@@ -79,7 +81,74 @@ module.exports = {
 		});
 
 		res.ok();
-	}
-	
+	},
+
+	enviarReporteVista: function(req, res){
+		var dominio = sails.config.correosSetting.dominio;
+		var apiKey = sails.config.correosSetting.apiKey;
+
+		fs.readFile("views/reportevista.ejs", "utf-8", function(err, contenido){
+
+			var datos  = {
+				to: "sergiohidalgocaceres@gmail.com",
+				from: sails.config.correosSetting.remitente,
+				subject: "Correo de SailsJS",
+				html: contenido
+			};
+
+			var mailgun = require("mailgun-js")({apiKey: apiKey, domain: dominio });
+
+			mailgun.messages().send(datos, function(err, mensaje){
+				if(err) {
+					res.negotiate(err);
+				}
+				console.log(mensaje);
+			});
+
+
+		})
+
+
+		res.ok();
+	},	
+
+	enviarReporteVistaConDatos: function(req, res){
+		var dominio = sails.config.correosSetting.dominio;
+		var apiKey = sails.config.correosSetting.apiKey;
+
+		fs.readFile("views/reportevistadatos.ejs", "utf-8", function(err, contenido){
+
+			var lista = [
+				{usuario: "Sergio", hora: "9:00am"},
+				{usuario: "Javier", hora: "10:02am"},
+				{usuario: "Ana", hora: "4:03pm"},
+				{usuario: "Marisol", hora: "4:33pm"},
+				{usuario: "Evelyn", hora: "11:01pm"}
+			];
+
+			var html = ejs.render(contenido, {registros: lista});
+
+			var datos  = {
+				to: "sergiohidalgocaceres@gmail.com",
+				from: sails.config.correosSetting.remitente,
+				subject: "Correo de SailsJS",
+				html: html
+			};
+
+			var mailgun = require("mailgun-js")({apiKey: apiKey, domain: dominio });
+
+			mailgun.messages().send(datos, function(err, mensaje){
+				if(err) {
+					res.negotiate(err);
+				}
+				console.log(mensaje);
+			});
+
+
+		})
+
+
+		res.ok();
+	}		
 };
 

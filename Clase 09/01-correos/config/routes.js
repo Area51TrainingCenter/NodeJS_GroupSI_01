@@ -49,7 +49,21 @@ module.exports.routes = {
   "get /enviarReporteHTML": {
     controller: "CorreosController",
     action: "enviarReporteHTML"
-  }   
+  },
+
+  "get /enviarReporteVista": {
+    controller: "CorreosController",
+    action: "enviarReporteVista"
+  },
+
+  "get /enviarReporteVistaConDatos": {
+    controller: "CorreosController",
+    action: "enviarReporteVistaConDatos"
+  } 
+
+     
+
+
 
   
 

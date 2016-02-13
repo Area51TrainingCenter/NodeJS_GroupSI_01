@@ -1,0 +1,9 @@
+<table>
+<tr><th>Usuario</th><th>Hora</th></tr>
+<% registros.forEach(function(item){ %>
+	<tr>
+		<td><%= item.usuario %></td>
+		<td><%= item.hora %></td>
+	</tr>
+<% }) %>
+</table>

@@ -6,6 +6,7 @@
  */
 var fs = require("fs");
 var ejs = require("ejs");
+var EJS2 = require("ejs2");
 
 module.exports = {
 
@@ -149,6 +150,124 @@ module.exports = {
 
 
 		res.ok();
-	}		
+	},
+
+	enviarReporteVistaEJS2: function(req, res){
+		var dominio = sails.config.correosSetting.dominio;
+		var apiKey = sails.config.correosSetting.apiKey;
+
+		var ejs2 = new EJS2();
+		var lista = [
+			{usuario: "Sergio", hora: "9:00am"},
+			{usuario: "Javier", hora: "10:02am"},
+			{usuario: "Ana", hora: "4:03pm"},
+			{usuario: "Marisol", hora: "4:33pm"},
+			{usuario: "Evelyn", hora: "11:01pm"}
+		];
+
+		ejs2.renderFile("views/reportevistadatos.ejs", {registros: lista}, function(err, contenido){
+
+			var datos  = {
+				to: "sergiohidalgocaceres@gmail.com",
+				from: sails.config.correosSetting.remitente,
+				subject: "Correo de SailsJS",
+				html: contenido
+			};
+
+			// Usuarios
+			// 	.find()
+			// 	.then(function(datos){
+			/*	AQUÍ OBTIENES LA VISTA CON LOS DATOS INSERTADOS
+					LUEGO ENVIAS EL CORREO A TRAVÉS DE MAILGUN
+			*/			// 	})
+			// 	.catch(function(err){})
+
+
+			var mailgun = require("mailgun-js")({apiKey: apiKey, domain: dominio });
+
+			mailgun.messages().send(datos, function(err, mensaje){
+				if(err) {
+					res.negotiate(err);
+				}
+				console.log(mensaje);
+			});
+
+		})
+
+		res.ok();
+	},
+
+	enviarReporteVistaAdjunto: function(req, res){
+		var dominio = sails.config.correosSetting.dominio;
+		var apiKey = sails.config.correosSetting.apiKey;
+
+		var ejs2 = new EJS2();
+		var lista = [
+			{usuario: "Sergio", hora: "9:00am"},
+			{usuario: "Javier", hora: "10:02am"},
+			{usuario: "Ana", hora: "4:03pm"},
+			{usuario: "Marisol", hora: "4:33pm"},
+			{usuario: "Evelyn", hora: "11:01pm"}
+		];
+
+		ejs2.renderFile("views/reportevistadatos.ejs", {registros: lista}, function(err, contenido){
+
+			var adjunto = ["pdfs/javascript.pdf", "pdfs/javascript.pdf"];
+
+			var datos  = {
+				to: "sergiohidalgocaceres@gmail.com",
+				from: sails.config.correosSetting.remitente,
+				subject: "Correo de SailsJS",
+				attachment: adjunto,
+				html: contenido
+			};
+
+			var mailgun = require("mailgun-js")({apiKey: apiKey, domain: dominio });
+
+			mailgun.messages().send(datos, function(err, mensaje){
+				if(err) {
+					res.negotiate(err);
+				}
+				console.log(mensaje);
+			});
+
+		})
+
+		res.ok();
+	},
+
+	enviarConServicio: function(req, res){
+		var ejs2 = new EJS2();
+		var lista = [
+			{usuario: "Sergio", hora: "9:00am"},
+			{usuario: "Javier", hora: "10:02am"},
+			{usuario: "Ana", hora: "4:03pm"},
+			{usuario: "Marisol", hora: "4:33pm"},
+			{usuario: "Evelyn", hora: "11:01pm"}
+		];
+
+		ejs2.renderFile("views/reportevistadatos.ejs", {registros: lista}, function(err, contenido){
+
+			var adjunto = ["pdfs/javascript.pdf", "pdfs/javascript.pdf"];
+
+			var opciones = {
+				destinatario: "sergiohidalgocaceres@gmail.com",
+				asunto: "Correo desde Sails",
+				contenido: contenido,
+				adjunto: adjunto,
+				esHTML: true,
+				cb: function(err, mensaje){
+					if(err) {
+						res.negotiate(err);
+					}
+					console.log(mensaje);
+				}
+			};
+
+			CorreosService.enviar(opciones)
+		})
+
+		res.ok();
+	}								
 };
 

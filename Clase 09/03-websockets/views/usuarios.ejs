@@ -1,0 +1,15 @@
+<table>
+	<tr>
+		<th>Usuarios</th>
+		<th>Acciones</th>
+	</tr>
+
+	<tr ng-class="{'actualizado': usuario.actualizado}" ng-repeat="usuario in ctrl.usuarios">
+		<td>
+			<span ng-hide="usuario.edicion">{{usuario.nombre}}</span>
+
+			<input type="text" ng-model="usuario.nombre" ng-show="usuario.edicion">
+		</td>
+		<td><a href ng-click="usuario.edicion=!usuario.edicion">Editar</a>&nbsp;<a href ng-click="ctrl.grabar(usuario)">Grabar</a></td>
+	</tr>
+</table>
